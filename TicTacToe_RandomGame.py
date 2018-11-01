@@ -1,33 +1,56 @@
 import random
 import TicTacToe_CheckWin as check
 
+allWinningGames = []
+foundAMatch = False
+numberOfAttempts = 0
+
 def generateGame():
+    currentGameMatches = False
     currentGame = [5, 5, 5, 5, 5, 5, 5, 5, 5]
-    gameFinished = False
+    gameWon = False
     numberOfMoves = 1 #starts at one for easy placement starting with x
 
-    while gameFinished == False:
+    while gameWon == False:
         indexToPlace = random.randint(0, 8)
         if (currentGame[indexToPlace] == 5):
             currentGame[indexToPlace] = numberOfMoves % 2
             numberOfMoves+=1
 
-        if (check.runCheckWin(currentGame) == True):
-            gameFinished = True
+        if (check.runCheckWin(currentGame) == "X" or check.runCheckWin(currentGame) == "O"):
+            gameWon = True
 
-        """gameFull = True
-        for i in range(9):
-            if (currentGame[i] == 2):
-                gameFull = False"""
+        if (numberOfMoves == 9):
+            break
 
-    print(currentGame[0], currentGame[1], currentGame[2])
-    print(currentGame[3], currentGame[4], currentGame[5])
-    print(currentGame[6], currentGame[7], currentGame[8])
-    print("\n")
+    if (gameWon):
+        """print(currentGame[0], currentGame[1], currentGame[2])
+        print(currentGame[3], currentGame[4], currentGame[5])
+        print(currentGame[6], currentGame[7], currentGame[8])
+        print("\n")"""
 
-    #return currentGame
+        try:
+            for i in range(len(allWinningGames)):
+                if (currentGame == allWinnningGames[i]):
+                    currentGameMatches = True
+                    print("SAME")
+        except:
+            pass
 
-for i in range(1):
+        if (currentGameMatches == False):
+            allWinningGames.append(currentGame)
+        else:
+            foundAMatch = True
+            
+        #print(allWinningGames)
+    else:
+        pass
+        #print("No winner\n")
+
+while (foundAMatch == False):
     generateGame()
+    numberOfAttempts += 1
+    print("\n", numberOfAttempts)
     
-#hi luke, im bored, a lot, like rly, ALOT
+print(allWinningGames)
+    

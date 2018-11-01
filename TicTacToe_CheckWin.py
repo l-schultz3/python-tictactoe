@@ -27,8 +27,8 @@ def runCheckWin(currentGame):
 
     if numberOfMoves % 2 == 1:
         if (checkWin(currentGame, 3, "X")):
-            return(True)
+            return("X")
     else:
         if (checkWin(currentGame, 0, "O")):
-            return(True)
+            return("O")
 
