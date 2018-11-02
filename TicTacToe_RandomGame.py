@@ -29,28 +29,29 @@ def generateGame():
         print(currentGame[6], currentGame[7], currentGame[8])
         print("\n")"""
 
-        try:
-            for i in range(len(allWinningGames)):
-                if (currentGame == allWinnningGames[i]):
-                    currentGameMatches = True
-                    print("SAME")
-        except:
-            pass
+        for i in range(len(allWinningGames)):
+            if (currentGame == allWinningGames[i]):
+                return(True)
 
         if (currentGameMatches == False):
             allWinningGames.append(currentGame)
-        else:
-            foundAMatch = True
             
-        #print(allWinningGames)
     else:
         pass
         #print("No winner\n")
 
-while (foundAMatch == False):
-    generateGame()
+while (numberOfAttempts < 5):
+    if (generateGame()):
+        foundAMatch = True
     numberOfAttempts += 1
-    print("\n", numberOfAttempts)
+    print("NumberOfAttempts: ", numberOfAttempts)
+    #print("Found A Match: ", foundAMatch)
+
+for i in range(len(allWinningGames)):
+    print(allWinningGames[i][0], allWinningGames[i][1], allWinningGames[i][2])
+    print(allWinningGames[i][3], allWinningGames[i][4], allWinningGames[i][5])
+    print(allWinningGames[i][6], allWinningGames[i][7], allWinningGames[i][8])
+    print("\n")
     
 print(allWinningGames)
     
