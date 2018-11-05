@@ -8,80 +8,43 @@ numberOfAttempts = 0
 
 def generateGame():
     currentGameMatches = False
-    currentGame = [5, 5, 5, 5, 5, 5, 5, 5, 5]
+    currentGame = [[5, 0], [5, 0], [5, 0], [5, 0], [5, 0], [5, 0], [5, 0], [5, 0], [5, 0]]
     gameWon = False
     numberOfMoves = 1 #starts at one for easy placement starting with x
 
-    for z in range(1):
-        for a in range(9):
-            currentGame = [5, 5, 5, 5, 5, 5, 5, 5, 5]
-            currentGame[a] = 1
-            for b in range(9):
-                if (currentGame[b] == 5):
-                    currentGame[b] = 0
-                    for c in range(9):
-                        if (currentGame[c] == 5):
-                            currentGame[c] = 1
-                            for d in range(9):
-                                if (currentGame[d] == 5):
-                                    currentGame[d] = 0
-                                    for e in range(9):
-                                        if (currentGame[e] == 5):
-                                            currentGame[e] = 1
-                                            for f in range(9):
-                                                if (currentGame[f] == 5):
-                                                    currentGame[f] = 0
-                                                    for g in range(9):
-                                                        if (currentGame[g] == 5):
-                                                            currentGame[g] = 1
-                                                            for h in range(9):
-                                                                if (currentGame[h] == 5):
-                                                                    currentGame[h] = 0
-                                                                    for i in range(9):
-                                                                        if (currentGame[i] == 5):
-                                                                            currentGame[i] = 1
-                                                                            print(currentGame)
-        print(currentGame)
+    for a in range(9):
+        cleanGame(1, currentGame)
+        
+        currentGame[a][0] = 1
+        currentGame[a][1] = 1
+        for b in range(9):
+            cleanGame(2, currentGame)
+            if (currentGame[b][0] == 5):
+                currentGame[b][0] = 0
+                currentGame[b][1] = 2
 
-        if (check.runCheckWin(currentGame) == "X" or check.runCheckWin(currentGame) == "O"):
-            gameWon = True
+                for c in range(9):
+                    cleanGame(3, currentGame)
+                    if (currentGame[c][0] == 5):
+                        currentGame[c][0] = 1
+                        currentGame[c][1] = 3
+                        print(currentGame)
+                        gameFile.write("\n")
+                        for i in range(9):
+                            if (i == 0):
+                                gameFile.write("{" + str(currentGame[i][0]) + ", ")
+                            elif (i < 8):
+                                gameFile.write(str(currentGame[i][0]) + ", ")
+                            else:
+                                gameFile.write(str(currentGame[i][0]) + "}, ")
 
-        if (numberOfMoves == 9):
-            break
+def cleanGame(move, currentGame):
+    for j in range(9):
+        if (currentGame[j][1] >= move):
+            currentGame[j] = [5, 0]
 
-    if (gameWon):
-        """print(currentGame[0], currentGame[1], currentGame[2])
-        print(currentGame[3], currentGame[4], currentGame[5])
-        print(currentGame[6], currentGame[7], currentGame[8])
-        print("\n")"""
+gameFile = open("gameFile.txt", "w")
 
-        for i in range(len(allWinningGames)):
-            if (currentGame == allWinningGames[i]):
-                return(True)
+generateGame()
 
-        if (currentGameMatches == False):
-            allWinningGames.append(currentGame)
-            
-    else:
-        pass
-        #print("No winner\n")
-
-while (numberOfAttempts < 1):
-    if (generateGame()):
-        foundAMatch = True
-    numberOfAttempts += 1
-    #print("NumberOfAttempts: ", numberOfAttempts)
-    #print("Found A Match: ", foundAMatch)
-
-winFile = open("winFile.txt", "w")
-winFile.write(str(datetime.datetime.now()))
-
-for i in range(len(allWinningGames)):
-    winFile.write("\n")
-    for j in range(len(allWinningGames[i])):
-        winFile.write(str(allWinningGames[i][j]))
-    
-print(allWinningGames)
-
-winFile.close()
-    
+gameFile.close()
