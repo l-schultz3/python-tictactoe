@@ -1,5 +1,6 @@
 import random
 import TicTacToe_CheckWin as check
+import datetime
 
 allWinningGames = []
 foundAMatch = False
@@ -40,18 +41,22 @@ def generateGame():
         pass
         #print("No winner\n")
 
-while (numberOfAttempts < 5):
+while (numberOfAttempts < 1000):
     if (generateGame()):
         foundAMatch = True
     numberOfAttempts += 1
     print("NumberOfAttempts: ", numberOfAttempts)
     #print("Found A Match: ", foundAMatch)
 
+winFile = open("winFile.txt", "w")
+winFile.write(str(datetime.datetime.now()))
+
 for i in range(len(allWinningGames)):
-    print(allWinningGames[i][0], allWinningGames[i][1], allWinningGames[i][2])
-    print(allWinningGames[i][3], allWinningGames[i][4], allWinningGames[i][5])
-    print(allWinningGames[i][6], allWinningGames[i][7], allWinningGames[i][8])
-    print("\n")
+    winFile.write("\n")
+    for j in range(len(allWinningGames[i])):
+        winFile.write(str(allWinningGames[i][j]))
     
 print(allWinningGames)
+
+winFile.close()
     
