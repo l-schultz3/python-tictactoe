@@ -5,6 +5,7 @@ import datetime
 allWinningGames = []
 foundAMatch = False
 numberOfAttempts = 0
+checkCurrentGame = [5, 5, 5, 5, 5, 5, 5, 5, 5]
 
 def writeGameToFile(currentGame):
     print(currentGame)
@@ -13,6 +14,15 @@ def writeGameToFile(currentGame):
             gameFile.write(str(currentGame[z][0]))
         else:
             gameFile.write(str(currentGame[z][0]) + "\n")
+
+def checkWin(currentGame):
+    for i in range(9):
+        checkCurrentGame[i] = currentGame[i][0]
+        #print(checkCurrentGame)
+    if (check.checkWin(checkCurrentGame, 3) or check.checkWin(checkCurrentGame, 0)):
+        #writeGameToFile(currentGame)
+        print("true")
+        return(True)
 
 def generateGame():
     currentGameMatches = False
@@ -49,7 +59,7 @@ def generateGame():
                                         currentGame[e][0] = 1
                                         currentGame[e][1] = 5
 
-                                        if (check.runCheckWin == "X" or check.runCheckWin == "O"):
+                                        if (checkWin(currentGame)):
                                             writeGameToFile(currentGame)
                                         else:
                                             for f in range(9):
@@ -58,7 +68,7 @@ def generateGame():
                                                     currentGame[f][0] = 0
                                                     currentGame[f][1] = 6
 
-                                                    if (check.runCheckWin == "X" or check.runCheckWin == "O"):
+                                                    if (checkWin(currentGame)):
                                                         writeGameToFile(currentGame)
                                                     else:
                                                         for g in range(9):
@@ -67,7 +77,7 @@ def generateGame():
                                                                 currentGame[g][0] = 1
                                                                 currentGame[g][1] = 7
 
-                                                                if (check.runCheckWin == "X" or check.runCheckWin == "O"):
+                                                                if (checkWin(currentGame)):
                                                                     writeGameToFile(currentGame)
                                                                 else:
                                                                     for h in range(9):
@@ -76,7 +86,7 @@ def generateGame():
                                                                             currentGame[h][0] = 0
                                                                             currentGame[h][1] = 8
 
-                                                                            if (check.runCheckWin == "X" or check.runCheckWin == "O"):
+                                                                            if (checkWin(currentGame)):
                                                                                 writeGameToFile(currentGame)
                                                                             else:
                                                                                 for i in range(9):

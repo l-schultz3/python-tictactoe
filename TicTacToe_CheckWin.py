@@ -1,6 +1,6 @@
 #currentGame = [1, 1, 1, 1, 0, 0, 0, 1, 0] #x
 
-def checkWin(currentGame, value, playerToWin):
+def checkWin(currentGame, value):
     if currentGame[0] + currentGame[1] + currentGame[2] == value:
         return(True)
     elif currentGame[3] + currentGame[4] + currentGame[5] == value:
