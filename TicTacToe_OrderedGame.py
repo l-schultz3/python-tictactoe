@@ -8,12 +8,8 @@ numberOfAttempts = 0
 checkCurrentGame = [5, 5, 5, 5, 5, 5, 5, 5, 5]
 
 def writeGameToFile(currentGame):
-    print(currentGame)
-    for z in range(9):
-        if (z < 8):
-            gameFile.write(str(currentGame[z][0]))
-        else:
-            gameFile.write(str(currentGame[z][0]) + "\n")
+    #print(currentGame)
+    gameFile.write(str(currentGame) + "\n")
 
 def checkWin(currentGame):
     for i in range(9):
@@ -21,7 +17,7 @@ def checkWin(currentGame):
         #print(checkCurrentGame)
     if (check.checkWin(checkCurrentGame, 3) or check.checkWin(checkCurrentGame, 0)):
         #writeGameToFile(currentGame)
-        print("true")
+        #print("true")
         return(True)
 
 def generateGame():
@@ -102,7 +98,7 @@ def cleanGame(move, currentGame):
         if (currentGame[j][1] >= move):
             currentGame[j] = [5, 0]
 
-gameFile = open("showGames/gameFile.txt", "w")
+gameFile = open("masterFile.txt", "w")
 
 generateGame()
 
