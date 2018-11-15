@@ -64,7 +64,7 @@ void showGame(String game, int startX, int startY) {
 }
 
 void waiting() {
-  int waitFor = millis() + 1000;
+  int waitFor = millis() + 500;
 
   while (millis() < waitFor) {
   }

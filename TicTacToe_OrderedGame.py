@@ -6,10 +6,11 @@ allWinningGames = []
 foundAMatch = False
 numberOfAttempts = 0
 checkCurrentGame = [5, 5, 5, 5, 5, 5, 5, 5, 5]
+onlyWinningGames = True
 
 def writeGameToFile(currentGame):
     #print(currentGame)
-    gameFile.write(str(currentGame) + "\n")
+    gameFile.write(str(currentGame) + ",\n")
 
 def checkWin(currentGame):
     for i in range(9):
@@ -91,15 +92,19 @@ def generateGame():
                                                                                         currentGame[i][0] = 1
                                                                                         currentGame[i][1] = 9
 
-                                                                                        writeGameToFile(currentGame)
+                                                                                        if (onlyWinningGames):
+                                                                                            if (checkWin(currentGame)): 
+                                                                                                writeGameToFile(currentGame)
+                                                                                        else:
+                                                                                            writeGameToFile(currentGame)
 
 def cleanGame(move, currentGame):
     for j in range(9):
         if (currentGame[j][1] >= move):
             currentGame[j] = [5, 0]
 
-gameFile = open("masterFile.txt", "w")
-
+gameFile = open("winningFile.txt", "w")
+gameFile.write("[")
 generateGame()
-
+gameFile.write("]")
 gameFile.close()
