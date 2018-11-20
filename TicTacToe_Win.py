@@ -11,32 +11,31 @@ numberOfFirstMoves = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 global stepsDown
 stepsDown = 0
 
-currentGame = [[5, 0], [5, 0], [5, 0], [5, 0], [5, 0], [5, 0], [5, 0], [5, 0], [5, 0]]
-
-def cleanGame(move):
+def cleanGame(move, currentGame):
     for j in range(9):
         if (currentGame[j][1] >= move):
             currentGame[j] = [5, 0]
 
-def completeMove(moveNumber):
+def completeMove(moveNumber, currentGame):
     global stepsDown
     stepsDown = stepsDown + 1
     for i in range(9):
-        cleanGame(moveNumber)
+        cleanGame(moveNumber, currentGame)
         if (currentGame[i][0] == 5):
             currentGame[i][0] = i % 2
             currentGame[i][1] = moveNumber
             print(i)
             allGames.append(currentGame)
+            print(currentGame)
             break
     if (stepsDown < 9):
-        generateGame()
+        generateGame(currentGame)
 
-def generateGame():
+def generateGame(currentGame):
     for i in range(9):
-        completeMove(i)
+        completeMove(i, currentGame)
         
-generateGame()
+generateGame([[5, 0], [5, 0], [5, 0], [5, 0], [5, 0], [5, 0], [5, 0], [5, 0], [5, 0]])
 
 for x in range(len(allGames)):
     print(allGames[x])

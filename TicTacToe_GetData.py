@@ -7,7 +7,6 @@ print("running...")
 allWinningGames = [[]]
 foundAMatch = False
 numberOfAttempts = 0
-checkCurrentGame = [5, 5, 5, 5, 5, 5, 5, 5, 5]
 onlyWinningGames = True
 numberOfFirstMoves = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
@@ -18,6 +17,7 @@ def writeGameToFile(currentGame):
     pass
 
 def checkWin(currentGame):
+    checkCurrentGame = [5, 5, 5, 5, 5, 5, 5, 5, 5]
     for i in range(9):
         checkCurrentGame[i] = currentGame[i][0]
         #print(checkCurrentGame)
@@ -32,16 +32,16 @@ def cleanGame(move, currentGame):
             currentGame[j] = [5, 0]
 
 def checkBestMove():
-    print(allWinningGames[0][1])
-    print(allWinningGames[0][2])
+    """print(allWinningGames[0][1])
+    print(allWinningGames[0][2])"""
     """for index in range(len(allWinningGames)):
         if (allWinningGames[index] != [[5, 0], [5, 0], [5, 0], [5, 0], [5, 0], [5, 0], [5, 0], [5, 0], [1, 1]]):
             print(index)"""
     #print(allWinningGames[1])
-    """for index in range(len(allWinningGames)):
-        for i in range(len(allWinningGames[index])):
+    for index in range(len(allWinningGames)):
+        for i in range(9):
             if (allWinningGames[index][i][1] == 1):
-                numberOfFirstMoves[i] += 1"""
+                numberOfFirstMoves[i] += 1
 
 def generateGame():
     currentGameMatches = False
@@ -80,7 +80,7 @@ def generateGame():
 
                                         if (checkWin(currentGame)):
                                             #writeGameToFile(currentGame)
-                                            allWinningGames[0].append(currentGame)
+                                            allWinningGames.append(currentGame)
                                         else:
                                             for f in range(9):
                                                 cleanGame(6, currentGame)
@@ -90,7 +90,7 @@ def generateGame():
 
                                                     if (checkWin(currentGame)):
                                                         #writeGameToFile(currentGame)
-                                                        allWinningGames[0].append(currentGame)
+                                                        allWinningGames.append(currentGame)
                                                     else:
                                                         for g in range(9):
                                                             cleanGame(7, currentGame)
@@ -100,7 +100,7 @@ def generateGame():
 
                                                                 if (checkWin(currentGame)):
                                                                     #writeGameToFile(currentGame)
-                                                                    allWinningGames[0].append(currentGame)
+                                                                    allWinningGames.append(currentGame)
                                                                 else:
                                                                     for h in range(9):
                                                                         cleanGame(8, currentGame)
@@ -110,7 +110,7 @@ def generateGame():
 
                                                                             if (checkWin(currentGame)):
                                                                                 #writeGameToFile(currentGame)
-                                                                                allWinningGames[0].append(currentGame)
+                                                                                allWinningGames.append(currentGame)
                                                                             else:
                                                                                 for i in range(9):
                                                                                     cleanGame(9, currentGame)
@@ -120,7 +120,7 @@ def generateGame():
 
                                                                                         if (checkWin(currentGame)): 
                                                                                             #writeGameToFile(currentGame)
-                                                                                            allWinningGames[0].append(currentGame)
+                                                                                            allWinningGames.append(currentGame)
                                                                                             #print(currentGame)
                                                                                         
 
