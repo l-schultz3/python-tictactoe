@@ -4,17 +4,12 @@ import datetime
 
 print("running...")
 
-allWinningGames = [[]]
 foundAMatch = False
 numberOfAttempts = 0
 onlyWinningGames = True
-numberOfFirstMoves = [0, 0, 0, 0, 0, 0, 0, 0, 0]
-
-def writeGameToFile(currentGame):
-    #print(currentGame)
-    #allWinningGames.append(currentGame)
-    #gameFile.write(str(currentGame) + ",\n")
-    pass
+numberOfWinningFirstMoves = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+numberOfLosingFirstMoves = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+numberOfDrawFirstMoves = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 def checkWin(currentGame):
     checkCurrentGame = [5, 5, 5, 5, 5, 5, 5, 5, 5]
@@ -22,7 +17,7 @@ def checkWin(currentGame):
         checkCurrentGame[i] = currentGame[i][0]
         #print(checkCurrentGame)
     if (check.checkWin(checkCurrentGame, 3) or check.checkWin(checkCurrentGame, 0)):
-        writeGameToFile(currentGame)
+        #writeGameToFile(currentGame)
         #print("true")
         return(True)
 
@@ -31,17 +26,23 @@ def cleanGame(move, currentGame):
         if (currentGame[j][1] >= move):
             currentGame[j] = [5, 0]
 
-def checkBestMove():
-    """print(allWinningGames[0][1])
-    print(allWinningGames[0][2])"""
-    """for index in range(len(allWinningGames)):
-        if (allWinningGames[index] != [[5, 0], [5, 0], [5, 0], [5, 0], [5, 0], [5, 0], [5, 0], [5, 0], [1, 1]]):
-            print(index)"""
-    #print(allWinningGames[1])
-    for index in range(len(allWinningGames)):
-        for i in range(9):
-            if (allWinningGames[index][i][1] == 1):
-                numberOfFirstMoves[i] += 1
+def checkBestMove(currentGame):
+    checkCurrentGame = [5, 5, 5, 5, 5, 5, 5, 5, 5]
+    for i in range(9):
+        checkCurrentGame[i] = currentGame[i][0]
+    if (check.checkWin(checkCurrentGame, 3)):
+        for i in range(len(currentGame)):
+            if (currentGame[i][1] == 1):
+                numberOfWinningFirstMoves[i] += 1
+    elif (check.checkWin(checkCurrentGame, 0)):
+        for i in range(len(currentGame)):
+            if (currentGame[i][1] == 1):
+                numberOfLosingFirstMoves[i] += 1
+    else:
+        for i in range(len(currentGame)):
+            if (currentGame[i][1] == 1):
+                numberOfDrawFirstMoves[i] += 1
+    
 
 def generateGame():
     currentGameMatches = False
@@ -79,8 +80,7 @@ def generateGame():
                                         currentGame[e][1] = 5
 
                                         if (checkWin(currentGame)):
-                                            #writeGameToFile(currentGame)
-                                            allWinningGames.append(currentGame)
+                                            checkBestMove(currentGame)
                                         else:
                                             for f in range(9):
                                                 cleanGame(6, currentGame)
@@ -89,8 +89,7 @@ def generateGame():
                                                     currentGame[f][1] = 6
 
                                                     if (checkWin(currentGame)):
-                                                        #writeGameToFile(currentGame)
-                                                        allWinningGames.append(currentGame)
+                                                        checkBestMove(currentGame)
                                                     else:
                                                         for g in range(9):
                                                             cleanGame(7, currentGame)
@@ -99,8 +98,7 @@ def generateGame():
                                                                 currentGame[g][1] = 7
 
                                                                 if (checkWin(currentGame)):
-                                                                    #writeGameToFile(currentGame)
-                                                                    allWinningGames.append(currentGame)
+                                                                    checkBestMove(currentGame)
                                                                 else:
                                                                     for h in range(9):
                                                                         cleanGame(8, currentGame)
@@ -109,8 +107,7 @@ def generateGame():
                                                                             currentGame[h][1] = 8
 
                                                                             if (checkWin(currentGame)):
-                                                                                #writeGameToFile(currentGame)
-                                                                                allWinningGames.append(currentGame)
+                                                                                checkBestMove(currentGame)
                                                                             else:
                                                                                 for i in range(9):
                                                                                     cleanGame(9, currentGame)
@@ -118,18 +115,15 @@ def generateGame():
                                                                                         currentGame[i][0] = 1
                                                                                         currentGame[i][1] = 9
 
-                                                                                        if (checkWin(currentGame)): 
-                                                                                            #writeGameToFile(currentGame)
-                                                                                            allWinningGames.append(currentGame)
-                                                                                            #print(currentGame)
+                                                                                        checkBestMove(currentGame)
                                                                                         
 
 generateGame()
 
-#print(allWinningGames)
+print("done generating...")
 
-checkBestMove()
-
-print(numberOfFirstMoves)
+print("winning first moves: " + str(numberOfWinningFirstMoves))
+print("losing first moves: " + str(numberOfLosingFirstMoves))
+print("draw first moves: " + str(numberOfDrawFirstMoves))
 
 print("completed...")
