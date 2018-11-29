@@ -62,6 +62,11 @@ def checkWin(gameToCheck, games, index):
     if (numberOfWins > 1):
         cleanGame(highestMax, gameToCheck)
 
+        for x in range(len(games)):
+            if games[x] == gameToCheck:
+                games.pop(index)
+                #print(len(games))
+
     if (numberOfWins == 0):
         games.pop(index)
 

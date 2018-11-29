@@ -24,9 +24,7 @@ def completeMove(moveNumber, currentGame):
         if (currentGame[i][0] == 5):
             currentGame[i][0] = i % 2
             currentGame[i][1] = moveNumber
-            print(i)
             allGames.append(currentGame)
-            print(currentGame)
             break
     if (stepsDown < 9):
         generateGame(currentGame)

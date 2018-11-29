@@ -10,6 +10,7 @@ onlyWinningGames = True
 numberOfWinningFirstMoves = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 numberOfLosingFirstMoves = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 numberOfDrawFirstMoves = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+length = 0
 
 def checkWin(currentGame):
     checkCurrentGame = [5, 5, 5, 5, 5, 5, 5, 5, 5]
@@ -45,6 +46,7 @@ def checkBestMove(currentGame):
     
 
 def generateGame():
+    global length
     currentGameMatches = False
     currentGame = [[5, 0], [5, 0], [5, 0], [5, 0], [5, 0], [5, 0], [5, 0], [5, 0], [5, 0]]
     gameWon = False
@@ -80,7 +82,8 @@ def generateGame():
                                         currentGame[e][1] = 5
 
                                         if (checkWin(currentGame)):
-                                            checkBestMove(currentGame)
+                                            #checkBestMove(currentGame)
+                                            length += 1
                                         else:
                                             for f in range(9):
                                                 cleanGame(6, currentGame)
@@ -89,7 +92,7 @@ def generateGame():
                                                     currentGame[f][1] = 6
 
                                                     if (checkWin(currentGame)):
-                                                        checkBestMove(currentGame)
+                                                        length += 1
                                                     else:
                                                         for g in range(9):
                                                             cleanGame(7, currentGame)
@@ -98,7 +101,7 @@ def generateGame():
                                                                 currentGame[g][1] = 7
 
                                                                 if (checkWin(currentGame)):
-                                                                    checkBestMove(currentGame)
+                                                                    length += 1
                                                                 else:
                                                                     for h in range(9):
                                                                         cleanGame(8, currentGame)
@@ -107,7 +110,7 @@ def generateGame():
                                                                             currentGame[h][1] = 8
 
                                                                             if (checkWin(currentGame)):
-                                                                                checkBestMove(currentGame)
+                                                                                length += 1
                                                                             else:
                                                                                 for i in range(9):
                                                                                     cleanGame(9, currentGame)
@@ -115,15 +118,17 @@ def generateGame():
                                                                                         currentGame[i][0] = 1
                                                                                         currentGame[i][1] = 9
 
-                                                                                        checkBestMove(currentGame)
+                                                                                        length += 1
                                                                                         
 
 generateGame()
 
 print("done generating...")
 
-print("winning first moves: " + str(numberOfWinningFirstMoves))
+"""print("winning first moves: " + str(numberOfWinningFirstMoves))
 print("losing first moves: " + str(numberOfLosingFirstMoves))
-print("draw first moves: " + str(numberOfDrawFirstMoves))
+print("draw first moves: " + str(numberOfDrawFirstMoves))"""
+
+print(length)
 
 print("completed...")
