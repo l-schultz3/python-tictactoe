@@ -1,5 +1,6 @@
 import itertools
 games = []
+finalList = []
 print("running...")
 
 print("creating permutations...")
@@ -60,12 +61,14 @@ def checkWin(gameToCheck, games, index):
         numberOfWins += 1
 
     if (numberOfWins > 1):
+        #games.pop(index)
         cleanGame(highestMax, gameToCheck)
+        games[index] = gameToCheck
 
-        for x in range(len(games)):
+        """for x in range(len(games)):
             if games[x] == gameToCheck:
                 games.pop(index)
-                #print(len(games))
+                #print(len(games))"""
 
     if (numberOfWins == 0):
         games.pop(index)
@@ -77,11 +80,23 @@ def filterGames(games):
             checkWin(games[i], games, i)
         except:
             pass
+    print("done...")
+
+def remove(duplicate):
+    print("removing duplicates...")
+    global finalList
+    for num in duplicate: 
+        if num not in finalList:
+            finalList.append(num)
+            if (len(finalList) % 50000 == 0): print(len(finalList))
+    print("done...")
 
 getGameArray(games)
 print(len(games))
 filterGames(games)
 print(len(games))
+remove(games)
+print(len(finalList))
 #printGames(games)
 
 print("completed...")
