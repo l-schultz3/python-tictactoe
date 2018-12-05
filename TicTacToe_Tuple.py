@@ -1,7 +1,7 @@
 print("running...")
 
-allGames = []
-winningGames = []
+allGames = ()
+winningGames = ()
 winningFirstMoves = [0] * 9
 
 wins = {
@@ -91,45 +91,44 @@ def generateGames():
                                     if (currentGame[e] == [10, 0]):
                                         currentGame[e] = [1, 5]
                                         if (checkWin(currentGame) != False):
-                                            winningGames.append(currentGame)
-                                            allGames.append(currentGame)
+                                            saveArrays(currentGame, winningGames, allGames)
                                         else:
                                             for f in range(9):
                                                 cleanGame(currentGame, 6)
                                                 if (currentGame[f] == [10, 0]):
                                                     currentGame[f] = [0, 6]
                                                     if (checkWin(currentGame) != False):
-                                                        winningGames.append(currentGame)
-                                                        allGames.append(currentGame)
+                                                        saveArrays(currentGame, winningGames, allGames)
                                                     else:
                                                         for g in range(9):
                                                             cleanGame(currentGame, 7)
                                                             if (currentGame[g] == [10, 0]):
                                                                 currentGame[g] = [1, 7]
                                                                 if (checkWin(currentGame) != False):
-                                                                    winningGames.append(currentGame)
-                                                                    allGames.append(currentGame)
+                                                                    saveArrays(currentGame, winningGames, allGames)
                                                                 else:
                                                                     for h in range(9):
                                                                         cleanGame(currentGame, 8)
                                                                         if (currentGame[h] == [10, 0]):
                                                                             currentGame[h] = [0, 8]
                                                                             if (checkWin(currentGame) != False):
-                                                                                winningGames.append(currentGame)
-                                                                                allGames.append(currentGame)
+                                                                                saveArrays(currentGame, winningGames, allGames)
                                                                             else:
                                                                                 for i in range(9):
                                                                                     cleanGame(currentGame, 9)
                                                                                     if (currentGame[i] == [10, 0]):
                                                                                         currentGame[i] = [1, 9]
-                                                                                        allGames.append(currentGame)
                                                                                         if (checkWin(currentGame) != False):
-                                                                                            winningGames.append(currentGame)
+                                                                                            saveArrays(currentGame, winningGames, allGames)
+def saveArrays(gameToSave, winningGames, allGames):
+    winningGames += tuple(gameToSave)
+    print(winningGames)
+    allGames += tuple(gameToSave)
+
 def checkArray(array):
     for i in range(len(array)):
         if (array[i] != array[1]):
             print(array[i])
-    print("checked")
 
 generateGames()
 
@@ -138,11 +137,11 @@ print("Number of Winning  Games:", len(winningGames), "\n")
 
 checkArray(winningGames)
 
-"""for game in range(len(winningGames)):
+for game in range(len(winningGames)):
     print(str(winningGames[game]))
 
 for win in wins:
-    print(win, wins[win])"""
+    print(win, wins[win])
 
 print("\n")
 checkFirstMove()

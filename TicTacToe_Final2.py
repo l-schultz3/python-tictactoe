@@ -63,7 +63,7 @@ def cleanGame(gameToClean, moveNumber):
 def generateGames():
     global allGames
     global winningGames
-    currentGame= [[10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0]]
+    games = [[[10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0]]]
 
     for a in range(9):
         if (a == 0):
@@ -72,59 +72,54 @@ def generateGames():
             print(".")
         else:
             print(".", end="")
-        cleanGame(currentGame, 1)
-        currentGame[a] = [1, 1]
+        cleanGame(games[len(games) - 1], 1)
+        games[len(games) - 1][a] = [1, 1]
         for b in range(9):
-            cleanGame(currentGame, 2)
-            if (currentGame[b] == [10, 0]):
-                currentGame[b] = [0, 2]
+            cleanGame(games[len(games) - 1], 2)
+            if (games[len(games) - 1][b] == [10, 0]):
+                games[len(games) - 1][b] = [0, 2]
                 for c in range(9):
-                    cleanGame(currentGame, 3)
-                    if (currentGame[c] == [10, 0]):
-                        currentGame[c] = [1, 3]
+                    cleanGame(games[len(games) - 1], 3)
+                    if (games[len(games) - 1][c] == [10, 0]):
+                        games[len(games) - 1][c] = [1, 3]
                         for d in range(9):
-                            cleanGame(currentGame, 4)
-                            if (currentGame[d] == [10, 0]):
-                                currentGame[d] = [0, 4]
+                            cleanGame(games[len(games) - 1], 4)
+                            if (games[len(games) - 1][d] == [10, 0]):
+                                games[len(games) - 1][d] = [0, 4]
                                 for e in range(9):
-                                    cleanGame(currentGame, 5)
-                                    if (currentGame[e] == [10, 0]):
-                                        currentGame[e] = [1, 5]
-                                        if (checkWin(currentGame) != False):
-                                            winningGames.append(currentGame)
-                                            allGames.append(currentGame)
+                                    cleanGame(games[len(games) - 1], 5)
+                                    if (games[len(games) - 1][e] == [10, 0]):
+                                        games[len(games) - 1][e] = [1, 5]
+                                        if (checkWin(games[len(games) - 1]) != False):
+                                            games.append([[10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0]])
                                         else:
                                             for f in range(9):
-                                                cleanGame(currentGame, 6)
-                                                if (currentGame[f] == [10, 0]):
-                                                    currentGame[f] = [0, 6]
-                                                    if (checkWin(currentGame) != False):
-                                                        winningGames.append(currentGame)
-                                                        allGames.append(currentGame)
+                                                cleanGame(games[len(games) - 1], 6)
+                                                if (games[len(games) - 1][f] == [10, 0]):
+                                                    games[len(games) - 1][f] = [0, 6]
+                                                    if (checkWin(games[len(games) - 1]) != False):
+                                                        games.append([[10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0]])
                                                     else:
                                                         for g in range(9):
-                                                            cleanGame(currentGame, 7)
-                                                            if (currentGame[g] == [10, 0]):
-                                                                currentGame[g] = [1, 7]
-                                                                if (checkWin(currentGame) != False):
-                                                                    winningGames.append(currentGame)
-                                                                    allGames.append(currentGame)
+                                                            cleanGame(games[len(games) - 1], 7)
+                                                            if (games[len(games) - 1][g] == [10, 0]):
+                                                                games[len(games) - 1][g] = [1, 7]
+                                                                if (checkWin(games[len(games) - 1]) != False):
+                                                                    games.append([[10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0]])
                                                                 else:
                                                                     for h in range(9):
-                                                                        cleanGame(currentGame, 8)
-                                                                        if (currentGame[h] == [10, 0]):
-                                                                            currentGame[h] = [0, 8]
-                                                                            if (checkWin(currentGame) != False):
-                                                                                winningGames.append(currentGame)
-                                                                                allGames.append(currentGame)
+                                                                        cleanGame(games[len(games) - 1], 8)
+                                                                        if (games[len(games) - 1][h] == [10, 0]):
+                                                                            games[len(games) - 1][h] = [0, 8]
+                                                                            if (checkWin(games[len(games) - 1]) != False):
+                                                                                games.append([[10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0]])
                                                                             else:
                                                                                 for i in range(9):
-                                                                                    cleanGame(currentGame, 9)
-                                                                                    if (currentGame[i] == [10, 0]):
-                                                                                        currentGame[i] = [1, 9]
-                                                                                        allGames.append(currentGame)
-                                                                                        if (checkWin(currentGame) != False):
-                                                                                            winningGames.append(currentGame)
+                                                                                    cleanGame(games[len(games) - 1], 9)
+                                                                                    if (games[len(games) - 1][i] == [10, 0]):
+                                                                                        games[len(games) - 1][i] = [1, 9]
+                                                                                        if (checkWin(games[len(games) - 1]) != False):
+                                                                                            games.append([[10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0], [10, 0]])
 def checkArray(array):
     for i in range(len(array)):
         if (array[i] != array[1]):
