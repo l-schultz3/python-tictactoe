@@ -10,7 +10,7 @@ onlyWinningGames = True
 
 def writeGameToFile(currentGame):
     #print(currentGame)
-    gameFile.write(str(currentGame) + ",\n")
+    gameFile.write(str(currentGame) + "\n")
 
 def checkWin(currentGame):
     for i in range(9):
@@ -104,7 +104,5 @@ def cleanGame(move, currentGame):
             currentGame[j] = [5, 0]
 
 gameFile = open("winningFile.txt", "w")
-gameFile.write("[")
 generateGame()
-gameFile.write("]")
 gameFile.close()
