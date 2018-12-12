@@ -20,14 +20,11 @@ def checkFirstMove():
     global winningGames
     global winningFirstMoves
     for game in winningGames:
-        print(game)
+        print(game) #this line is only here to test, I know it slows it down
         for move in range(len(game)):
             if (game[move][1] == 1):
-                print(move)
                 winningFirstMoves[move] += 1
                 
-
-#Will my code ever work? ~ Luke
 def checkWin(gameToCheck):
     if (gameToCheck[0][0] == gameToCheck[1][0] == gameToCheck[2][0] and gameToCheck[0][0] != 10):
         wins["top horizontal"] += 1
@@ -125,29 +122,14 @@ def generateGames():
                                                                                         allGames.append(currentGame)
                                                                                         if (checkWin(currentGame) != False):
                                                                                             winningGames.append(currentGame)
-def checkArray(array):
-    for i in range(len(array)):
-        if (array[i] != array[1]):
-            print(array[i])
-    print("checked")
 
 generateGames()
 
 print("Number of Possible Games:", len(allGames))
-print("Number of Winning  Games:", len(winningGames), "\n")
+print("Number of Winning  Games:", len(winningGames))
 
-#checkArray(winningGames)
-
-"""for game in range(len(winningGames)):
-    print(str(winningGames[game]))
-
-for win in wins:
-    print(win, wins[win])"""
-
-print("\n")
 checkFirstMove()
 
 print(winningFirstMoves)
-
 
 print("completed...")
