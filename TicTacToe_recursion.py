@@ -1,5 +1,6 @@
 allGames = []
 allWins = []
+drawGames = []
 xWins = []
 oWins = []
 
@@ -15,11 +16,12 @@ wins = {
     }
 
 winningFirstMoves = [0] * 9
+losingFirstMoves = [0] * 9
 
-def checkFirstMoves(arr):
+def checkFirstMoves(arr, index, arrayToWrite):
     for i in range(len(arr)):
-        if (arr[i] == 1):
-            winningFirstMoves[i] += 1
+        if (arr[i] == index):
+            arrayToWrite[i] += 1
 
 def checkWin(gameToCheck):
     if ((gameToCheck[0] % 2) == (gameToCheck[1] % 2) == (gameToCheck[2] % 2) and (gameToCheck[0]) != 0 and (gameToCheck[1]) != 0 and (gameToCheck[2]) != 0):
@@ -61,6 +63,7 @@ def recursion(arr, n):
         fillNextMove(arr, n + 1)
     else:
         allGames.append(arr)
+        drawGames.append(arr)
 
 def fillNextMove(arr, move):
     newArrs = []
@@ -77,13 +80,21 @@ def fillNextMove(arr, move):
 
 recursion([0, 0, 0, 0, 0, 0, 0, 0, 0], 0)
 for game in xWins:
-    checkFirstMoves(game)
+    checkFirstMoves(game, 1, winningFirstMoves)
 
-print(len(allGames))
-print(len(allWins))
-print(winningFirstMoves)
-print(wins)
+for game in oWins:
+    checkFirstMoves(game, 1, losingFirstMoves)
 
-"""for game in allGames:
-    print(game)"""
+def printStats():
+    global allGames, allWins, xWins, oWins, wins, winningFirstMoves
+
+    print(len(allGames), "total number of games")
+    print(len(allWins), "total number of winning games")
+    print("", len(drawGames), "total number of drawn games")
+    print(len(xWins), "total number of games won by X")
+    print("", len(oWins), "total number of games won by O")
+    print(winningFirstMoves)
+    print(losingFirstMoves)
+
+printStats()
 
