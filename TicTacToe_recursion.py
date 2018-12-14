@@ -4,6 +4,8 @@ drawGames = []
 xWins = []
 oWins = []
 
+movesToWin = [0] * 5
+
 wins = {
         "top horizontal": 0,
         "middle horizontal": 0,
@@ -76,6 +78,15 @@ def fillNextMove(arr, move):
     for newArr in newArrs:
         if (newArr != []):
             recursion(newArr, move)
+
+def checkMovesToWin(wins):
+    for game in wins:
+        usedSpace = 0
+        for i in range(len(game)):
+            if game[i] != 0:
+                usedSpace += 1
+        movesToWin[usedSpace - 5] += 1
+                
             
 
 recursion([0, 0, 0, 0, 0, 0, 0, 0, 0], 0)
@@ -84,6 +95,8 @@ for game in xWins:
 
 for game in oWins:
     checkFirstMoves(game, 1, losingFirstMoves)
+
+checkMovesToWin(allWins)
 
 def printStats():
     global allGames, allWins, xWins, oWins, wins, winningFirstMoves
@@ -95,6 +108,7 @@ def printStats():
     print("", len(oWins), "total number of games won by O")
     print(winningFirstMoves)
     print(losingFirstMoves)
+    print(movesToWin)
 
 printStats()
 
