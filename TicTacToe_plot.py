@@ -1,17 +1,13 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Dec 14 13:13:03 2018
-
-@author: l.schultz3
-"""
-
-import matplotlib.pyplot as plt
+from matplotlib import pyplot as plt
+import numpy as np
 
 allGames = []
 allWins = []
 drawGames = []
 xWins = []
 oWins = []
+
+movesToWin = [0] * 5
 
 wins = {
         "top horizontal": 0,
@@ -85,6 +81,15 @@ def fillNextMove(arr, move):
     for newArr in newArrs:
         if (newArr != []):
             recursion(newArr, move)
+
+def checkMovesToWin(wins):
+    for game in wins:
+        usedSpace = 0
+        for i in range(len(game)):
+            if game[i] != 0:
+                usedSpace += 1
+        movesToWin[usedSpace - 5] += 1
+                
             
 
 recursion([0, 0, 0, 0, 0, 0, 0, 0, 0], 0)
@@ -93,6 +98,8 @@ for game in xWins:
 
 for game in oWins:
     checkFirstMoves(game, 1, losingFirstMoves)
+
+checkMovesToWin(allWins)
 
 def printStats():
     global allGames, allWins, xWins, oWins, wins, winningFirstMoves
@@ -104,16 +111,16 @@ def printStats():
     print("", len(oWins), "total number of games won by O")
     print(winningFirstMoves)
     print(losingFirstMoves)
+    print(movesToWin)
 
 printStats()
 
-p1 = plt.bar(1, len(allGames))
+plt.xticks([5, 6, 7, 8, 9])
 
-p2 = plt.bar(2, len(xWins))
-p3 = plt.bar(2, len(oWins), bottom=len(xWins))
-p4 = plt.bar(2, len(drawGames), bottom=len(xWins)+len(oWins))
+plt.plot([5, 6, 7, 8, 9], movesToWin)
 
-plt.ylabel('Amount of Games')
-plt.legend((p2[0], p3[0], p4[0]), ('X', 'O', 'Draw'))
+plt.title('Wins vs Moves')
+plt.ylabel('Amount of Wins')
+plt.xlabel('Number of Moves')
 
 plt.show()
