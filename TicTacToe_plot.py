@@ -115,12 +115,72 @@ def printStats():
 
 printStats()
 
-plt.xticks([5, 6, 7, 8, 9])
+def winsVsMoves():
+    plt.bar([5, 6, 7, 8, 9], movesToWin)
+    
+    plt.yticks(np.arange(0, len(allWins) + 1, step=len(allWins)/8))
+    plt.title('Wins vs Moves')
+    plt.ylabel('Amount of Wins')
+    plt.xlabel('Number of Moves')
+    
+    plt.show()
 
-plt.plot([5, 6, 7, 8, 9], movesToWin)
+def winsVsMovesSummative():
+    summativeMovesToWin = movesToWin.copy()
+    
+    for i in range(len(summativeMovesToWin)):
+        if i > 0:
+            summativeMovesToWin[i] += summativeMovesToWin[i - 1]
+    
+    plt.bar([5, 6, 7, 8, 9], summativeMovesToWin)
+    
+    plt.yticks(np.arange(0, len(allWins) + 1, step=len(allWins)/8))
+    plt.title('Wins vs Moves Summative')
+    plt.ylabel('Amount of Wins')
+    plt.xlabel('Number of Moves')
+    
+    plt.show()
 
-plt.title('Wins vs Moves')
-plt.ylabel('Amount of Wins')
-plt.xlabel('Number of Moves')
+def firstMoves():
+    firstMoveNames = ["corner", "edge", "center"]
+    firstMoveValues = [winningFirstMoves[0], winningFirstMoves[1], winningFirstMoves[4]]
+    
+    plt.bar(firstMoveNames, firstMoveValues)
+    plt.title("Number of X Wins based on First Move")
+    plt.show()
+    
+def totalVsSpecific():
+    p1 = plt.bar(1, len(allGames))
+    p2 = plt.bar(2, len(allWins))
+    p3 = plt.bar(2, len(drawGames), bottom=len(allWins))
 
-plt.show()
+    plt.title('Number of Games')
+    plt.xticks([])
+    plt.legend((p1[0], p2[0], p3[0]), ("Total Games", "Winning Games", "Drawn Games"))
+    
+    plt.show()
+    
+def waysOfWinning():
+    winningValues = []
+    winningNames = []
+    
+    for way in wins:
+        winningNames.append(way)
+        winningValues.append(wins[way])
+        
+    plt.figure(figsize=(14, 3))
+    
+    plt.bar(winningNames, winningValues, 0.7)
+    
+    #plt.yticks(np.arange(0, len(allWins) + 1, step=len(allWins)/8))
+    plt.title('Wins')
+    """plt.ylabel('Amount of Wins')
+    plt.xlabel('Wins')"""
+    
+    plt.show()
+
+winsVsMoves()
+winsVsMovesSummative()
+firstMoves()
+totalVsSpecific()
+waysOfWinning()
