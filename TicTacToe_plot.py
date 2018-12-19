@@ -17,7 +17,8 @@ wins = {
         "middle vertical": 0,
         "right vertical": 0,
         "backward diagonal": 0,
-        "forward diagonal": 0
+        "forward diagonal": 0,
+        "cross": 0
     }
 
 winningFirstMoves = [0] * 9
@@ -29,7 +30,10 @@ def checkFirstMoves(arr, index, arrayToWrite):
             arrayToWrite[i] += 1
 
 def checkWin(gameToCheck):
-    if ((gameToCheck[0] % 2) == (gameToCheck[1] % 2) == (gameToCheck[2] % 2) and (gameToCheck[0]) != 0 and (gameToCheck[1]) != 0 and (gameToCheck[2]) != 0):
+    if ((gameToCheck[0] % 2) == (gameToCheck[2] % 2) == (gameToCheck[4] % 2) == (gameToCheck[6] % 2) == (gameToCheck[8] % 2) and (gameToCheck[0]) != 0 and (gameToCheck[2]) != 0 and (gameToCheck[4]) != 0 and (gameToCheck[6]) != 0 and (gameToCheck[8]) != 0):
+        wins["cross"] += 1
+        return (gameToCheck[0] % 2) + 1
+    elif ((gameToCheck[0] % 2) == (gameToCheck[1] % 2) == (gameToCheck[2] % 2) and (gameToCheck[0]) != 0 and (gameToCheck[1]) != 0 and (gameToCheck[2]) != 0):
         wins["top horizontal"] += 1
         return (gameToCheck[0] % 2) + 1
     elif ((gameToCheck[3] % 2) == (gameToCheck[4] % 2) == (gameToCheck[5] % 2) and (gameToCheck[3]) != 0 and (gameToCheck[4]) != 0 and (gameToCheck[5]) != 0):
@@ -47,12 +51,12 @@ def checkWin(gameToCheck):
     elif ((gameToCheck[2] % 2) == (gameToCheck[5] % 2) == (gameToCheck[8] % 2) and (gameToCheck[2]) != 0 and (gameToCheck[5]) != 0 and (gameToCheck[8]) != 0):
         wins["right vertical"] += 1
         return (gameToCheck[2] % 2) + 1
-    elif ((gameToCheck[0] % 2) == (gameToCheck[4] % 2) == (gameToCheck[8] % 2) and (gameToCheck[0]) != 0 and (gameToCheck[4]) != 0 and (gameToCheck[8]) != 0):
-        wins["backward diagonal"] += 1
-        return (gameToCheck[0] % 2) + 1
     elif ((gameToCheck[2] % 2) == (gameToCheck[4] % 2) == (gameToCheck[6] % 2) and (gameToCheck[2]) != 0 and (gameToCheck[4]) != 0 and (gameToCheck[6]) != 0):
         wins["forward diagonal"] += 1
         return (gameToCheck[2] % 2) + 1
+    elif ((gameToCheck[0] % 2) == (gameToCheck[4] % 2) == (gameToCheck[8] % 2) and (gameToCheck[0]) != 0 and (gameToCheck[4]) != 0 and (gameToCheck[8]) != 0):
+        wins["backward diagonal"] += 1
+        return (gameToCheck[0] % 2) + 1
     else: return False
 
 def recursion(arr, n):
@@ -112,6 +116,7 @@ def printStats():
     print(winningFirstMoves)
     print(losingFirstMoves)
     print(movesToWin)
+    print(wins)
 
 printStats()
 
@@ -161,21 +166,13 @@ def totalVsSpecific():
     plt.show()
     
 def waysOfWinning():
-    winningValues = []
-    winningNames = []
-    
-    for way in wins:
-        winningNames.append(way)
-        winningValues.append(wins[way])
-        
-    plt.figure(figsize=(14, 3))
+    winningValues = [wins["top horizontal"], wins["left vertical"], wins["forward diagonal"], wins["cross"]]
+    winningNames = ["horizontal", "vertical", "diagonal", "cross"]
     
     plt.bar(winningNames, winningValues, 0.7)
     
-    #plt.yticks(np.arange(0, len(allWins) + 1, step=len(allWins)/8))
     plt.title('Wins')
-    """plt.ylabel('Amount of Wins')
-    plt.xlabel('Wins')"""
+    plt.ylabel('Number of Wins')
     
     plt.show()
 
