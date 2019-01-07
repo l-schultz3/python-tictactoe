@@ -6,9 +6,6 @@ oWins = []
 ind = 0
 convertedWins = []
 
-duplicateWins = []
-uniqueWins = []
-
 movesToWin = [0] * 5
 
 wins = {
@@ -136,19 +133,16 @@ def checkRot(master, check):
         return False
 
 for i in range(len(convertedWins)):
-    if (i % 1000 == 0):
-        print(i)
-    matched = False
+    """
+        check entire array for match before any action completed
+    """
     for j in range(len(convertedWins)):
         if (i != j):
-            if (checkRot(convertedWins[i], convertedWins[j]) == True):
-                matched = True
-    if (matched):
-        duplicateWins.append(convertedWins[i])
-    else:
-        uniqueWins.append(convertedWins[i])
-                
-print(len(uniqueWins))
+            if (checkRot(convertedWins[i], convertedWins[j]) == False)
+            checkRot(convertedWins[i], convertedWins[j])
+            print(ind)
+
+print(ind)
 
 #printStats()
 

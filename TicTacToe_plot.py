@@ -20,6 +20,7 @@ wins = {
         "forward diagonal": 0,
         "cross": 0,
         "tee": 0,
+        "arrow": 0
     }
 
 winningFirstMoves = [0] * 9
@@ -48,6 +49,18 @@ def checkWin(gameToCheck):
         return (gameToCheck[0] % 2) + 1
     elif ((gameToCheck[2] % 2) == (gameToCheck[5] % 2) == (gameToCheck[8] % 2) == (gameToCheck[4] % 2) == (gameToCheck[3] % 2) and (gameToCheck[2]) != 0 and (gameToCheck[5]) != 0 and (gameToCheck[8]) != 0 and (gameToCheck[4]) != 0 and (gameToCheck[3]) != 0):
         wins["tee"] += 1
+        return (gameToCheck[2] % 2) + 1
+    elif ((gameToCheck[0] % 2) == (gameToCheck[1] % 2) == (gameToCheck[2] % 2) == (gameToCheck[4] % 2) == (gameToCheck[6] % 2) and (gameToCheck[0]) != 0 and (gameToCheck[1]) != 0 and (gameToCheck[2]) != 0 and (gameToCheck[4]) != 0 and (gameToCheck[6]) != 0):
+        wins["arrow"] += 1
+        return (gameToCheck[0] % 2) + 1
+    elif ((gameToCheck[0] % 2) == (gameToCheck[1] % 2) == (gameToCheck[2] % 2) == (gameToCheck[4] % 2) == (gameToCheck[8] % 2) and (gameToCheck[0]) != 0 and (gameToCheck[1]) != 0 and (gameToCheck[2]) != 0 and (gameToCheck[4]) != 0 and (gameToCheck[8]) != 0):
+        wins["arrow"] += 1
+        return (gameToCheck[0] % 2) + 1
+    elif ((gameToCheck[0] % 2) == (gameToCheck[4] % 2) == (gameToCheck[6] % 2) == (gameToCheck[7] % 2) == (gameToCheck[8] % 2) and (gameToCheck[0]) != 0 and (gameToCheck[4]) != 0 and (gameToCheck[6]) != 0 and (gameToCheck[7]) != 0 and (gameToCheck[8]) != 0):
+        wins["arrow"] += 1
+        return (gameToCheck[0] % 2) + 1
+    elif ((gameToCheck[2] % 2) == (gameToCheck[4] % 2) == (gameToCheck[6] % 2) == (gameToCheck[7] % 2) == (gameToCheck[8] % 2) and (gameToCheck[2]) != 0 and (gameToCheck[4]) != 0 and (gameToCheck[6]) != 0 and (gameToCheck[7]) != 0 and (gameToCheck[8]) != 0):
+        wins["arrow"] += 1
         return (gameToCheck[2] % 2) + 1
     elif ((gameToCheck[0] % 2) == (gameToCheck[1] % 2) == (gameToCheck[2] % 2) and (gameToCheck[0]) != 0 and (gameToCheck[1]) != 0 and (gameToCheck[2]) != 0):
         wins["top horizontal"] += 1
@@ -182,8 +195,8 @@ def totalVsSpecific():
     plt.show()
     
 def waysOfWinning():
-    winningValues = [wins["top horizontal"], wins["left vertical"], wins["forward diagonal"], wins["cross"], wins["tee"]]
-    winningNames = ["horizontal", "vertical", "diagonal", "cross", "tee"]
+    winningValues = [wins["top horizontal"], wins["left vertical"], wins["forward diagonal"], wins["cross"], wins["tee"], wins["arrow"]]
+    winningNames = ["horizontal", "vertical", "diagonal", "cross", "tee", "arrow"]
     
     plt.bar(winningNames, winningValues, 0.7)
     
