@@ -44,59 +44,59 @@ def check2dWin(gameToCheck, dis):
         return False
 
 def checkThroughWin(gameToCheck):
-    for i in range(9):
+    for index in range(9):
         if ((gameToCheck[index] % 2) == (gameToCheck[index + 9] % 2) == (gameToCheck[index + 18] % 2) and ((gameToCheck[index]) != 0 and (gameToCheck[index + 9]) != 0 and (gameToCheck[index + 18]) != 0)):
             wins["3d"] += 1
             return True
     else: return False
-	
+    
 def check3dWin(gameToCheck):
-	if ((gameToCheck[0] % 2) == (gameToCheck[10] % 2) == (gameToCheck[20] % 2) and (gameToCheck[0]) != 0 and (gameToCheck[10]) != 0 and (gameToCheck[20]) != 0):
+    if ((gameToCheck[0] % 2) == (gameToCheck[10] % 2) == (gameToCheck[20] % 2) and (gameToCheck[0]) != 0 and (gameToCheck[10]) != 0 and (gameToCheck[20]) != 0):
             wins["3d"] += 1
             return True
-	if ((gameToCheck[0] % 2) == (gameToCheck[13] % 2) == (gameToCheck[26] % 2) and (gameToCheck[0]) != 0 and (gameToCheck[13]) != 0 and (gameToCheck[26]) != 0):
+    if ((gameToCheck[0] % 2) == (gameToCheck[13] % 2) == (gameToCheck[26] % 2) and (gameToCheck[0]) != 0 and (gameToCheck[13]) != 0 and (gameToCheck[26]) != 0):
             wins["3d"] += 1
             return True
-	if ((gameToCheck[0] % 2) == (gameToCheck[12] % 2) == (gameToCheck[24] % 2) and (gameToCheck[0]) != 0 and (gameToCheck[12]) != 0 and (gameToCheck[24]) != 0):
+    if ((gameToCheck[0] % 2) == (gameToCheck[12] % 2) == (gameToCheck[24] % 2) and (gameToCheck[0]) != 0 and (gameToCheck[12]) != 0 and (gameToCheck[24]) != 0):
             wins["3d"] += 1
             return True
-	if ((gameToCheck[1] % 2) == (gameToCheck[13] % 2) == (gameToCheck[25] % 2) and (gameToCheck[1]) != 0 and (gameToCheck[13]) != 0 and (gameToCheck[25]) != 0):
+    if ((gameToCheck[1] % 2) == (gameToCheck[13] % 2) == (gameToCheck[25] % 2) and (gameToCheck[1]) != 0 and (gameToCheck[13]) != 0 and (gameToCheck[25]) != 0):
             wins["3d"] += 1
             return True
-	if ((gameToCheck[2] % 2) == (gameToCheck[10] % 2) == (gameToCheck[18] % 2) and (gameToCheck[2]) != 0 and (gameToCheck[10]) != 0 and (gameToCheck[18]) != 0):
+    if ((gameToCheck[2] % 2) == (gameToCheck[10] % 2) == (gameToCheck[18] % 2) and (gameToCheck[2]) != 0 and (gameToCheck[10]) != 0 and (gameToCheck[18]) != 0):
             wins["3d"] += 1
             return True
-	if ((gameToCheck[2] % 2) == (gameToCheck[13] % 2) == (gameToCheck[24] % 2) and (gameToCheck[2]) != 0 and (gameToCheck[13]) != 0 and (gameToCheck[24]) != 0):
+    if ((gameToCheck[2] % 2) == (gameToCheck[13] % 2) == (gameToCheck[24] % 2) and (gameToCheck[2]) != 0 and (gameToCheck[13]) != 0 and (gameToCheck[24]) != 0):
             wins["3d"] += 1
             return True
-	if ((gameToCheck[2] % 2) == (gameToCheck[14] % 2) == (gameToCheck[26] % 2) and (gameToCheck[2]) != 0 and (gameToCheck[14]) != 0 and (gameToCheck[26]) != 0):
+    if ((gameToCheck[2] % 2) == (gameToCheck[14] % 2) == (gameToCheck[26] % 2) and (gameToCheck[2]) != 0 and (gameToCheck[14]) != 0 and (gameToCheck[26]) != 0):
             wins["3d"] += 1
             return True
-	if ((gameToCheck[3] % 2) == (gameToCheck[13] % 2) == (gameToCheck[23] % 2) and (gameToCheck[3]) != 0 and (gameToCheck[13]) != 0 and (gameToCheck[23]) != 0):
+    if ((gameToCheck[3] % 2) == (gameToCheck[13] % 2) == (gameToCheck[23] % 2) and (gameToCheck[3]) != 0 and (gameToCheck[13]) != 0 and (gameToCheck[23]) != 0):
             wins["3d"] += 1
             return True
-	if ((gameToCheck[5] % 2) == (gameToCheck[13] % 2) == (gameToCheck[21] % 2) and (gameToCheck[5]) != 0 and (gameToCheck[13]) != 0 and (gameToCheck[21]) != 0):
+    if ((gameToCheck[5] % 2) == (gameToCheck[13] % 2) == (gameToCheck[21] % 2) and (gameToCheck[5]) != 0 and (gameToCheck[13]) != 0 and (gameToCheck[21]) != 0):
             wins["3d"] += 1
             return True
-	if ((gameToCheck[6] % 2) == (gameToCheck[12] % 2) == (gameToCheck[18] % 2) and (gameToCheck[6]) != 0 and (gameToCheck[12]) != 0 and (gameToCheck[18]) != 0):
+    if ((gameToCheck[6] % 2) == (gameToCheck[12] % 2) == (gameToCheck[18] % 2) and (gameToCheck[6]) != 0 and (gameToCheck[12]) != 0 and (gameToCheck[18]) != 0):
             wins["3d"] += 1
             return True
-	if ((gameToCheck[6] % 2) == (gameToCheck[13] % 2) == (gameToCheck[20] % 2) and (gameToCheck[6]) != 0 and (gameToCheck[13]) != 0 and (gameToCheck[20]) != 0):
+    if ((gameToCheck[6] % 2) == (gameToCheck[13] % 2) == (gameToCheck[20] % 2) and (gameToCheck[6]) != 0 and (gameToCheck[13]) != 0 and (gameToCheck[20]) != 0):
             wins["3d"] += 1
             return True
-	if ((gameToCheck[6] % 2) == (gameToCheck[16] % 2) == (gameToCheck[26] % 2) and (gameToCheck[6]) != 0 and (gameToCheck[16]) != 0 and (gameToCheck[26]) != 0):
+    if ((gameToCheck[6] % 2) == (gameToCheck[16] % 2) == (gameToCheck[26] % 2) and (gameToCheck[6]) != 0 and (gameToCheck[16]) != 0 and (gameToCheck[26]) != 0):
             wins["3d"] += 1
             return True
-	if ((gameToCheck[7] % 2) == (gameToCheck[13] % 2) == (gameToCheck[19] % 2) and (gameToCheck[7]) != 0 and (gameToCheck[13]) != 0 and (gameToCheck[19]) != 0):
+    if ((gameToCheck[7] % 2) == (gameToCheck[13] % 2) == (gameToCheck[19] % 2) and (gameToCheck[7]) != 0 and (gameToCheck[13]) != 0 and (gameToCheck[19]) != 0):
             wins["3d"] += 1
             return True
-	if ((gameToCheck[8] % 2) == (gameToCheck[14] % 2) == (gameToCheck[20] % 2) and (gameToCheck[8]) != 0 and (gameToCheck[14]) != 0 and (gameToCheck[20]) != 0):
+    if ((gameToCheck[8] % 2) == (gameToCheck[14] % 2) == (gameToCheck[20] % 2) and (gameToCheck[8]) != 0 and (gameToCheck[14]) != 0 and (gameToCheck[20]) != 0):
             wins["3d"] += 1
             return True
-	if ((gameToCheck[8] % 2) == (gameToCheck[13] % 2) == (gameToCheck[18] % 2) and (gameToCheck[8]) != 0 and (gameToCheck[13]) != 0 and (gameToCheck[18]) != 0):
+    if ((gameToCheck[8] % 2) == (gameToCheck[13] % 2) == (gameToCheck[18] % 2) and (gameToCheck[8]) != 0 and (gameToCheck[13]) != 0 and (gameToCheck[18]) != 0):
             wins["3d"] += 1
             return True
-	if ((gameToCheck[8] % 2) == (gameToCheck[16] % 2) == (gameToCheck[24] % 2) and (gameToCheck[8]) != 0 and (gameToCheck[16]) != 0 and (gameToCheck[24]) != 0):
+    if ((gameToCheck[8] % 2) == (gameToCheck[16] % 2) == (gameToCheck[24] % 2) and (gameToCheck[8]) != 0 and (gameToCheck[16]) != 0 and (gameToCheck[24]) != 0):
             wins["3d"] += 1
             return True
 
@@ -106,6 +106,8 @@ def checkWin(gameToCheck):
     else: return False
 
 def recursion(arr, n):
+    global allGames, allWins, drawGames
+    
     if (checkWin(arr)):
         allGames += 1
         allWins += 1
