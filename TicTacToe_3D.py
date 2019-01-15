@@ -1,13 +1,18 @@
-allGames = []
-allWins = []
-drawGames = []
-xWins = []
-oWins = []
+import datetime
+
+allGames = 0
+allWins = 0
+drawGames = 0
+xWins = 0
+oWins = 0
 
 wins = {
         "2d": 0,
         "3d": 0
     }
+
+gameFile = open("dataFile.txt", "w")
+gameFile.write(str(datetime.datetime.now))
 
 def check2dWin(gameToCheck, dis):
     base = 9 * dis
@@ -102,13 +107,13 @@ def checkWin(gameToCheck):
 
 def recursion(arr, n):
     if (checkWin(arr)):
-        allGames.append(arr)
-        allWins.append(arr)
+        allGames += 1
+        allWins += 1
     elif (n <= 26):        
         fillNextMove(arr, n + 1)
     else:
-        allGames.append(arr)
-        drawGames.append(arr)
+        allGames += 1
+        drawGames += 1
 
 def fillNextMove(arr, move):
     newArrs = []
@@ -122,7 +127,7 @@ def fillNextMove(arr, move):
         if (newArr != []):
             recursion(newArr, move)
 
-recursion([0] * 9, 0)
+recursion([0] * 27, 0)
 
 def printStats():
     global allGames, allWins, xWins, oWins, wins, winningFirstMoves
@@ -132,4 +137,12 @@ def printStats():
     print(len(drawGames), "total number of drawn games")
 
 printStats()
+
+gameFile.write(len(allGames) + "total number of games")
+gameFile.write(len(allWins) + "total number of winning games")
+gameFile.write(len(drawGames) + "total number of drawn games")
+
+gameFile.write(str(datetime.datetime.now))
+
+gameFile.close()
 
