@@ -67,64 +67,11 @@ def removeDuplicates(array):
 
     return newArr
 
-def checkThroughWin(firstGame, secondGame, thirdGame):
-    for index in range(9):
-        if (firstGame[index] == secondGame[index] == thirdGame[index]):
-            return True
-            break
-    return False
-
-def checkAngledWin(firstGame, secondGame, thirdGame):
-    if (firstGame[0] == secondGame[1] == thirdGame[2]):
-        return True
-    elif (firstGame[0] == secondGame[4] == thirdGame[8]):
-        return True
-    elif (firstGame[0] == secondGame[3] == thirdGame[6]):
-        return True
-    elif (firstGame[1] == secondGame[4] == thirdGame[7]):
-        return True
-    elif (firstGame[2] == secondGame[1] == thirdGame[0]):
-        return True
-    elif (firstGame[2] == secondGame[4] == thirdGame[6]):
-        return True
-    elif (firstGame[2] == secondGame[5] == thirdGame[8]):
-        return True
-    elif (firstGame[3] == secondGame[4] == thirdGame[5]):
-        return True
-    elif (firstGame[5] == secondGame[4] == thirdGame[3]):
-        return True
-    elif (firstGame[6] == secondGame[3] == thirdGame[0]):
-        return True
-    elif (firstGame[6] == secondGame[4] == thirdGame[2]):
-        return True
-    elif (firstGame[6] == secondGame[7] == thirdGame[8]):
-        return True
-    elif (firstGame[7] == secondGame[4] == thirdGame[2]):
-        return True
-    elif (firstGame[8] == secondGame[7] == thirdGame[6]):
-        return True
-    elif (firstGame[8] == secondGame[4] == thirdGame[0]):
-        return True
-    elif (firstGame[8] == secondGame[5] == thirdGame[2]):
-        return True
-
 print(len(drawGames))
+print(len(allGames))
 
 newDrawGames = removeDuplicates(drawGames)
+newAllGames = removeDuplicates(allGames)
 
 print(len(newDrawGames))
-
-for game in newDrawGames:
-    print(game)
-
-def checkForDraw():
-    global newDrawGames
-
-    for a in range(len(newDrawGames)):
-        for b in range(len(newDrawGames)):
-            #print(b)
-            for c in range(len(newDrawGames)):
-                if (not(checkThroughWin(newDrawGames[a], newDrawGames[b], newDrawGames[c]) or checkAngledWin(newDrawGames[a], newDrawGames[b], newDrawGames[c]))):
-                    print(str(a, b, c))
-
-checkForDraw()
+print(len(newAllGames))
