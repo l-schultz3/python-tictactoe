@@ -1,6 +1,36 @@
-allGames = []
-allWins = []
-drawGames = []
+"""
+Created by Luke Schultz in 2018
+
+A program to check if a game of three dimensional tic-tac-toe can end in a draw
+
+A game of three dimensional is best understood as a combination of three two dimensional games,
+stacked on top of each other. With this definition, it becomes much simpler to extend work into the third dimension.
+When talking about a three dimensional game, I use the terms plane index, and dimensional index.
+Plane index refers to the positioning in the second dimension, running from 0 to 8, with 0 at the top left,
+and 8 at the bottom right. Dimensional index refers to the position in the stack of two dimensional games,
+running from 0 to 2, with 0 being the top, and 2 being the bottom.
+
+To find out if a specific game ends in a draw, you need to rule out all the possible ways on winning.
+There are three main methods of winning a game of three dimensional tic-tac-toe.
+The first way is with all the winning tiles on the same plane,
+which would be done in the exact same way as a two dimensional game.
+The second way is with the same plane index, but a different dimensional index,
+a simpler explanation of this would be three tiles stacked on top of each other,
+to form three in a row. The third method of winning is a combination of the two listed prior.
+Three tiles in a row, but with both a different plane index and a different dimensional index.
+This is best visualized as forming the same lines as a two dimensional win, but going through all three layers.
+
+This code works by first generating all possible combinations of moves that create a two dimensional game.
+All of the combinations of moves that end in a draw are then converted into games,
+meaning they are represented by “X”s and “O”s (2s and 1s respectively in the code)
+instead of the orders of moves (this is important because it greatly decreased the number of comparisons made, speeding up the code).
+All of those drawn games are then combined in every possible way,
+and are checked for the other two methods of winning. Every game ends in a win.
+"""
+
+allMoves = []
+allWinningMoves = []
+allDrawMoves = []
 
 def checkWin(gameToCheck):
     if ((gameToCheck[0] % 2) == (gameToCheck[1] % 2) == (gameToCheck[2] % 2) and (gameToCheck[0]) != 0 and (gameToCheck[1]) != 0 and (gameToCheck[2]) != 0):
@@ -23,13 +53,13 @@ def checkWin(gameToCheck):
 
 def recursion(arr, n):
     if (checkWin(arr)):
-        allGames.append(arr)
-        allWins.append(arr)
+        allMoves.append(arr)
+        allWinningMoves.append(arr)
     elif (n <= 8):        
         fillNextMove(arr, n + 1)
     else:
-        allGames.append(arr)
-        drawGames.append(arr)
+        allMoves.append(arr)
+        allDrawMoves.append(arr)
 
 def fillNextMove(arr, move):
     newArrs = []
@@ -42,12 +72,10 @@ def fillNextMove(arr, move):
     for newArr in newArrs:
         if (newArr != []):
             recursion(newArr, move)
-                
-recursion([0] * 9, 0)
 
 def formatArray(arr):
     for i in range(len(arr)):
-        arr[i] = arr[i] % 2
+        arr[i] = arr[i] % 2 + 1
     return arr
 
 def removeDuplicates(array):
@@ -108,23 +136,22 @@ def checkAngledWin(firstGame, secondGame, thirdGame):
     elif (firstGame[8] == secondGame[5] == thirdGame[2]):
         return True
 
-print(len(drawGames))
+def checkForDraw(gamesToCompare):
+    drawFound = False
 
-newDrawGames = removeDuplicates(drawGames)
+    for a in gamesToCompare:
+        for b in gamesToCompare:
+            for c in gamesToCompare:
+                if (not(checkThroughWin(a, b, c) or checkAngledWin(a, b, c))):
+                    print("Drawn game found, with combinations:" + a, b, c)
+                    drawFound = True
 
-print(len(newDrawGames))
+    if not drawFound:
+        print("No drawn games found")
 
-for game in newDrawGames:
-    print(game)
+recursion([0] * 9, 0)
 
-def checkForDraw():
-    global newDrawGames
+drawGames = removeDuplicates(allDrawMoves)
 
-    for a in range(len(newDrawGames)):
-        for b in range(len(newDrawGames)):
-            #print(b)
-            for c in range(len(newDrawGames)):
-                if (not(checkThroughWin(newDrawGames[a], newDrawGames[b], newDrawGames[c]) or checkAngledWin(newDrawGames[a], newDrawGames[b], newDrawGames[c]))):
-                    print(str(a, b, c))
-
-checkForDraw()
+checkForDraw(drawGames)
+                
