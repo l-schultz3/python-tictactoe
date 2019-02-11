@@ -1,100 +1,31 @@
 """
 Created by Luke Schultz in 2018
-
-A program to check if a game of three dimensional tic-tac-toe can end in a draw
-
-A game of three dimensional is best understood as a combination of three two dimensional games,
-stacked on top of each other. With this definition, it becomes much simpler to extend work into the third dimension.
-When talking about a three dimensional game, I use the terms plane index, and dimensional index.
-Plane index refers to the positioning in the second dimension, running from 0 to 8, with 0 at the top left,
-and 8 at the bottom right. Dimensional index refers to the position in the stack of two dimensional games,
-running from 0 to 2, with 0 being the top, and 2 being the bottom.
-
-To find out if a specific game ends in a draw, you need to rule out all the possible ways on winning.
-There are three main methods of winning a game of three dimensional tic-tac-toe.
-The first way is with all the winning tiles on the same plane,
-which would be done in the exact same way as a two dimensional game.
-The second way is with the same plane index, but a different dimensional index,
-a simpler explanation of this would be three tiles stacked on top of each other,
-to form three in a row. The third method of winning is a combination of the two listed prior.
-Three tiles in a row, but with both a different plane index and a different dimensional index.
-This is best visualized as forming the same lines as a two dimensional win, but going through all three layers.
-
-This code works by first generating all possible combinations of moves that create a two dimensional game.
-All of the combinations of moves that end in a draw are then converted into games,
-meaning they are represented by “X”s and “O”s (2s and 1s respectively in the code)
-instead of the orders of moves (this is important because it greatly decreased the number of comparisons made, speeding up the code).
-All of those drawn games are then combined in every possible way,
-and are checked for the other two methods of winning. Every game ends in a win.
+A program to check if a three dimensional game of tic-tac-toe can end in a draw
 """
 
 allMoves = []
 allWinningMoves = []
 allDrawMoves = []
 
-def checkWin(gameToCheck):
-    if ((gameToCheck[0] % 2) == (gameToCheck[1] % 2) == (gameToCheck[2] % 2) and (gameToCheck[0]) != 0 and (gameToCheck[1]) != 0 and (gameToCheck[2]) != 0):
+def check2DWin(movesToCheck):
+    if ((movesToCheck[0] % 2) == (movesToCheck[1] % 2) == (movesToCheck[2] % 2) and (movesToCheck[0]) != 0 and (movesToCheck[1]) != 0 and (movesToCheck[2]) != 0):
         return True
-    elif ((gameToCheck[3] % 2) == (gameToCheck[4] % 2) == (gameToCheck[5] % 2) and (gameToCheck[3]) != 0 and (gameToCheck[4]) != 0 and (gameToCheck[5]) != 0):
+    elif ((movesToCheck[3] % 2) == (movesToCheck[4] % 2) == (movesToCheck[5] % 2) and (movesToCheck[3]) != 0 and (movesToCheck[4]) != 0 and (movesToCheck[5]) != 0):
         return True
-    elif ((gameToCheck[6] % 2) == (gameToCheck[7] % 2) == (gameToCheck[8] % 2) and (gameToCheck[6]) != 0 and (gameToCheck[7]) != 0 and (gameToCheck[8]) != 0):
+    elif ((movesToCheck[6] % 2) == (movesToCheck[7] % 2) == (movesToCheck[8] % 2) and (movesToCheck[6]) != 0 and (movesToCheck[7]) != 0 and (movesToCheck[8]) != 0):
         return True
-    elif ((gameToCheck[0] % 2) == (gameToCheck[3] % 2) == (gameToCheck[6] % 2) and (gameToCheck[0]) != 0 and (gameToCheck[3]) != 0 and (gameToCheck[6]) != 0):
+    elif ((movesToCheck[0] % 2) == (movesToCheck[3] % 2) == (movesToCheck[6] % 2) and (movesToCheck[0]) != 0 and (movesToCheck[3]) != 0 and (movesToCheck[6]) != 0):
         return True
-    elif ((gameToCheck[1] % 2) == (gameToCheck[4] % 2) == (gameToCheck[7] % 2) and (gameToCheck[1]) != 0 and (gameToCheck[4]) != 0 and (gameToCheck[7]) != 0):
+    elif ((movesToCheck[1] % 2) == (movesToCheck[4] % 2) == (movesToCheck[7] % 2) and (movesToCheck[1]) != 0 and (movesToCheck[4]) != 0 and (movesToCheck[7]) != 0):
         return True
-    elif ((gameToCheck[2] % 2) == (gameToCheck[5] % 2) == (gameToCheck[8] % 2) and (gameToCheck[2]) != 0 and (gameToCheck[5]) != 0 and (gameToCheck[8]) != 0):
+    elif ((movesToCheck[2] % 2) == (movesToCheck[5] % 2) == (movesToCheck[8] % 2) and (movesToCheck[2]) != 0 and (movesToCheck[5]) != 0 and (movesToCheck[8]) != 0):
         return True
-    elif ((gameToCheck[0] % 2) == (gameToCheck[4] % 2) == (gameToCheck[8] % 2) and (gameToCheck[0]) != 0 and (gameToCheck[4]) != 0 and (gameToCheck[8]) != 0):
+    elif ((movesToCheck[0] % 2) == (movesToCheck[4] % 2) == (movesToCheck[8] % 2) and (movesToCheck[0]) != 0 and (movesToCheck[4]) != 0 and (movesToCheck[8]) != 0):
         return True
-    elif ((gameToCheck[2] % 2) == (gameToCheck[4] % 2) == (gameToCheck[6] % 2) and (gameToCheck[2]) != 0 and (gameToCheck[4]) != 0 and (gameToCheck[6]) != 0):
+    elif ((movesToCheck[2] % 2) == (movesToCheck[4] % 2) == (movesToCheck[6] % 2) and (movesToCheck[2]) != 0 and (movesToCheck[4]) != 0 and (movesToCheck[6]) != 0):
         return True
     else: return False
-
-def recursion(arr, n):
-    if (checkWin(arr)):
-        allMoves.append(arr)
-        allWinningMoves.append(arr)
-    elif (n <= 8):        
-        fillNextMove(arr, n + 1)
-    else:
-        allMoves.append(arr)
-        allDrawMoves.append(arr)
-
-def fillNextMove(arr, move):
-    newArrs = []
-    for i in range(len(arr)):
-        if (arr[i] == 0):
-            tempArr = arr.copy()
-            tempArr[i] = move
-            newArrs.append(tempArr)
-
-    for newArr in newArrs:
-        if (newArr != []):
-            recursion(newArr, move)
-
-def formatArray(arr):
-    for i in range(len(arr)):
-        arr[i] = arr[i] % 2 + 1
-    return arr
-
-def removeDuplicates(array):
-    newArr = []
-
-    for i in range(len(array)):
-        tempArr = formatArray(array[i])
-        matched = False
-        for j in range(len(newArr)):
-            try:
-                if (tempArr == newArr[j]):
-                    matched = True
-            except:
-                pass
-        if matched == False:
-            newArr.append(tempArr)
-
-    return newArr
-
+	
 def checkThroughWin(firstGame, secondGame, thirdGame):
     for index in range(9):
         if (firstGame[index] == secondGame[index] == thirdGame[index]):
@@ -136,7 +67,53 @@ def checkAngledWin(firstGame, secondGame, thirdGame):
     elif (firstGame[8] == secondGame[5] == thirdGame[2]):
         return True
 
+def recursion(arr, lastMove):
+    if (check2DWin(arr)): #if game has been won
+        allMoves.append(arr)
+        allWinningMoves.append(arr)
+    elif (lastMove <= len(arr) - 1): #if the game has not been filled with moves
+        fillNextMove(arr, lastMove + 1)
+    else: #the game has ended in a draw
+        allMoves.append(arr)
+        allDrawMoves.append(arr)
+
+def fillNextMove(arr, move): #given a set of moves for a game, this gives all next possible moves
+    newArrs = []
+    for i in range(len(arr)):
+        if (arr[i] == 0):
+            tempArr = arr.copy()
+            tempArr[i] = move
+            newArrs.append(tempArr)
+
+    for newArr in newArrs:
+        if (newArr != []):
+            recursion(newArr, move)
+
+def formatArray(arr): #converts specific value of move order into either an X (1) or an O (2)
+    for i in range(len(arr)):
+        arr[i] = arr[i] % 2 + 1
+    return arr
+
+def movesToGame(array): #converts arrays made up of order of moves into arrays made up of X's and O's
+    newArr = []
+
+    for i in range(len(array)):
+        tempArr = formatArray(array[i])
+        matched = False
+        for j in range(len(newArr)):
+            try:
+                if (tempArr == newArr[j]):
+                    matched = True
+            except:
+                pass
+        if matched == False:
+            newArr.append(tempArr)
+
+    return newArr
+
 def checkForDraw(gamesToCompare):
+    #creates 3D games by combining 2D games
+    #then checks 3D games to see if they end in a draw
     drawFound = False
 
     for a in gamesToCompare:
@@ -149,9 +126,11 @@ def checkForDraw(gamesToCompare):
     if not drawFound:
         print("No drawn games found")
 
+print("generating all 2D games...")
 recursion([0] * 9, 0)
 
-drawGames = removeDuplicates(allDrawMoves)
+drawGames = movesToGame(allDrawMoves)
 
+print("checking for draws in 3D games...")
 checkForDraw(drawGames)
                 
